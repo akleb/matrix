@@ -41,7 +41,12 @@ void Matrix_copy(p_Matrix *pp_m, const p_Matrix p_m){
 } //Matrix_init
 
 void Matrix_destroy(p_Matrix *pp_m){
+    free((*pp_m)->arr);
+    free(*pp_m);
 
+    *pp_m = NULL;
+
+    return;
 } // Matrix_destroy
 
 void Matrix_set_val(p_Matrix p_m, const unsigned i, const unsigned j, const void *val){
