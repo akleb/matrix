@@ -7,11 +7,16 @@
 #ifndef AKLEB_MATRIX_H
 #define AKLEB_MATRIX_H
 
-#define TYPE int
+typedef enum{
+    DOUBLE,
+    INT,
+    FLOAT
+} TYPE;
 
-typedef struct Matrix{
-    TYPE *arr; 
+typedef struct{
+    void *arr; 
     unsigned n, m;
+    TYPE t;
 } Matrix;
 
 typedef Matrix* p_Matrix;
@@ -36,10 +41,10 @@ typedef Matrix* p_Matrix;
     -------
     void
 */
-void Matrix_init(p_Matrix *pp_m, const unsigned n, const unsigned m);
+void Matrix_init(p_Matrix *pp_m, const unsigned n, const unsigned m, const TYPE t);
 
 /*
-    Function : Matrix_init
+    Function : Matrix_copy
         A copy constructor that intializes pp_m to p_m
 
         REQUIRES MATCHING DESTROY
@@ -53,7 +58,7 @@ void Matrix_init(p_Matrix *pp_m, const unsigned n, const unsigned m);
     -------
     void
 */
-void Matrix_init(p_Matrix *pp_m, const p_Matrix p_m);
+void Matrix_copy(p_Matrix *pp_m, const p_Matrix p_m);
 
 /*
     Function : Matrix_destory
@@ -78,13 +83,13 @@ void Matrix_destroy(p_Matrix *pp_m);
     p_m : the matrix to modify
     i   : the row index
     j   : the column index
-    val : the value to set
+    val : pointer to the value to set
 
     Returns
     -------
     void
 */
-void Matrix_set_val(p_Matrix p_m, const unsigned i, const unsigned j, const TYPE val);
+void Matrix_set_val(p_Matrix p_m, const unsigned i, const unsigned j, const void *val);
 
 /*
     Function : Matrix_set_row
@@ -100,7 +105,7 @@ void Matrix_set_val(p_Matrix p_m, const unsigned i, const unsigned j, const TYPE
     -------
     void
 */
-void Matrix_set_row(p_Matrix p_m, const unsigned i, const TYPE *val);
+void Matrix_set_row(p_Matrix p_m, const unsigned i, const void *val);
 
 /*
     Function : Matrix_set_col
@@ -117,29 +122,29 @@ void Matrix_set_row(p_Matrix p_m, const unsigned i, const TYPE *val);
     -------
     void
 */
-void Matrix_set_col(p_Matrix p_m, const unsigned j, const TYPE *val);
+void Matrix_set_col(p_Matrix p_m, const unsigned j, const void *val);
 
 // -------------
 //  MATRIX MATH
 // -------------
 
 /*
-    Function : Matrix_add
+    Function : Matrix_add_val
         Adds the value in val to every element in p_m
 
     Parameters
     ----------
     p_m : matrix to modify
-    val : value to add
+    val : pointer to value to add
 
     Returns
     -------
     void
 */
-void Matrix_add(p_Matrix p_m, const TYPE val);
+void Matrix_add_val(p_Matrix p_m, const void *val);
 
 /*
-    Function : Matrix_add
+    Function : Matrix_add_mat
         Allocates a new matrix and initializes each value to p_m1[i,j] + p_m2[i,j].
 
         REQUIRES MATCHING DESTROY
@@ -153,10 +158,10 @@ void Matrix_add(p_Matrix p_m, const TYPE val);
     -------
     A new matrix with value at [i,j] = p_m1[i,j] + p_m2[i,j]
 */
-p_Matrix Matrix_add(const p_Matrix p_m1, const p_Matrix p_m2);
+p_Matrix Matrix_add_mat(const p_Matrix p_m1, const p_Matrix p_m2);
 
 /*
-    Function : Matrix_add_inplace
+    Function : Matrix_iadd_mat
         Preforms elementwise addition between p_m1 and p_m2, storing them in p_m1
 
     Parameters
@@ -168,7 +173,7 @@ p_Matrix Matrix_add(const p_Matrix p_m1, const p_Matrix p_m2);
     -------
     void
 */
-void Matrix_add_inplace(p_Matrix p_m1, const p_Matrix p_m2);
+void Matrix_iadd_mat(p_Matrix p_m1, const p_Matrix p_m2);
 
 /*
     Function : Matrix_multiply
@@ -205,8 +210,8 @@ p_Matrix Matrix_multiply(const p_Matrix p_m1, const p_Matrix p_m2);
 p_Matrix Matrix_transpose(const p_Matrix p_m);
 
 /*
-    Function Matrix_transpose_inplace
-        Preforms a matrix tranpose on a square matrix in place.
+    Function Matrix_itranspose
+        Preforms a matrix tranpose on a square matrix in-place.
 
     Parameters
     ----------
@@ -216,7 +221,7 @@ p_Matrix Matrix_transpose(const p_Matrix p_m);
     -------
     void
 */
-void Matrix_transpose_inplace(p_Matrix p_m);
+void Matrix_itranspose(p_Matrix p_m);
 
 // -----------------
 //  MATRIX BOOLEANS
@@ -230,12 +235,12 @@ void Matrix_transpose_inplace(p_Matrix p_m);
     ----------
     p_m1 : first matrix
     p_m2 : second matrix
-    tol  : the absolute tolerance between the two matricies
+    tol  : pointer to the absolute tolerance between the two matricies
 
     Returns
     -------
     0 if the Matricies differ and 1 if they are identical
 */
-int Matrix_equal(p_Matrix p_m1, p_Matrix p_m2, TYPE tol);
+int Matrix_equal(p_Matrix p_m1, p_Matrix p_m2, void *tol);
 
 #endif
