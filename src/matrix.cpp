@@ -85,8 +85,15 @@ void Matrix<T>::setCol(const unsigned j, const T *col){
 
 template <class T>
 Matrix<T> Matrix<T>::transpose(){
+    Matrix<T> new_matrix(m, n);
+    for(unsigned i = 0; i < n; i++){
+        for(unsigned j = 0; j < m; j++){
+            getVal(i, j, new_matrix.arr + (j*n + i));
+        } //for
+   } //for
 
-}
+   return new_matrix;
+} //transpose
 
 template <class T>
 void Matrix<T>::itranspose(){
