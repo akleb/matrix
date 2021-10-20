@@ -7,7 +7,7 @@
 #ifndef AKLEB_MATRIX_H
 #define AKLEB_MATRIX_H
 
-template <typename T>
+template <class T>
 class Matrix{
 public:
     T *arr; 
@@ -59,6 +59,56 @@ public:
         destructor
     */
     ~Matrix();
+
+    // --------------
+    //  MATRIX ACCESS
+    // --------------
+
+    /*
+        Function : getVal
+            Gets the value stored in the matrix at location [i j]
+        
+        Parameters
+        ----------
+        i   : the row index
+        j   : the column index
+        val : updated to the value stored in the matrix
+
+        Returns
+        -------
+        The value stored in the array
+    */
+    void getVal(const unsigned i, const unsigned j, T *val);
+
+    /*
+        Function : getVal
+            Returns the value stored in the matrix at location [i j]
+        
+        Parameters
+        ----------
+        i   : the row index
+        row : updated to the values in row i, requires row to be preallocated to size m
+
+        Returns
+        -------
+        The value stored in the array
+    */
+    void getRow(const unsigned i, T *row);
+
+    /*
+        Function : getVal
+            Returns the value stored in the matrix at location [i j]
+        
+        Parameters
+        ----------
+        j   : the columns index
+        col : updated to the values in column j, requires column to be preallocated to size n
+
+        Returns
+        -------
+        void
+    */
+    void getCol(const unsigned j, T *col);
 
     /*
         Function : setVal

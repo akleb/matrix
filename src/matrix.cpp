@@ -33,20 +33,42 @@ Matrix<T>::~Matrix(){
     m = 0;
 } //~Matrix
 
+// ---------------
+//  MATRIX ACCESS
+// ---------------
+
+template <class T>
+void Matrix<T>::getVal(const unsigned i, const unsigned j, T *val){
+    *val = arr[i*m + j];
+    return;
+} //getVal
+
+template <class T>
+void Matrix<T>::getRow(const unsigned i, T *row){
+    for (unsigned j = 0; j < m; ++j) row[j] = arr[i*m + j]; 
+    return;
+} //getRow
+
+template <class T>
+void Matrix<T>::getCol(const unsigned j, T *col){
+    for (unsigned i = 0; i < n; ++i) col[i] = arr[i*m + j];
+    return;
+} //getCol
+
 template <class T>
 void Matrix<T>::setVal(const unsigned i, const unsigned j, const T val){
 
-}
+} //setVal
 
 template <class T>
 void Matrix<T>::setRow(const unsigned i, const T *val){
 
-}
+} //setRow
 
 template <class T>
 void Matrix<T>::setCol(const unsigned j, const void *val){
 
-}
+} //setCol
 
 // -------------
 //  MATRIX MATH
