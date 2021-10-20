@@ -22,16 +22,25 @@ include_directories(${INCDIR})
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/bin)
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/lib)
 
-set(M_INC ${INCDIR}/matrix.h)
-set(M_SRC ${SRCDIR}/matrix.c)
+set(M_INC ${INCDIR}/matrix)
+set(M_SRC ${SRCDIR}/matrix)
 
 # Add compiling to flags
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -DCOMPILING=yes")
 
+#functions we have
+set(Matrix_init TRUE)
+
+foreach(TYPE int float double)
+    set(HEADER_INCLUDE "#include \"matrix_${TYPE}.h\"")
+    configure_file(${M_SRC}.c ${M_SRC}_${TYPE}.c)
+    configure_file(${M_INC}.h ${M_INC}_${TYPE}.h)
+    add_library(${TYPE}Matrix ${M_SRC}_${TYPE}.c ${M_INC}_${TYPE}.h)
+endforeach()
+
 # ----------------
 #  Library Target
 # ----------------
-add_library(Matrix ${M_SRC} ${M_INC})
 
 # --------------
 #  Unit Testing

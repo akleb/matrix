@@ -5,42 +5,36 @@
     Matrix Class
 */
 
-#include "matrix.h"
 #include <stdlib.h>
+#cmakedefine HEADER_INCLUDE ${HEADER_INCLUDE}
+#ifndef HEADER_INCLUDE
+#include "matrix.h"
+#endif
 
 // -----------------------
 //  MATRIX INITIALIZATION
 // -----------------------
 
-void Matrix_init(p_Matrix *pp_m, const unsigned n, const unsigned m, const TYPE t){
+Matrix_init{
+    unsigned i;
 
     *pp_m = malloc(sizeof(Matrix));
 
     (*pp_m)->m = m;
     (*pp_m)->n = n;
 
-    switch(t){
-        case DOUBLE:
-            (*pp_m)->arr = malloc(sizeof(double));
-            break;
-        case FLOAT:
-            (*pp_m)->arr = malloc(sizeof(float));
-            break;
-        case INT:
-            (*pp_m)->arr = malloc(sizeof(int));
-            break;
-    } //switch
+    (*pp_m)->arr = malloc(sizeof(TYPE)*n*m);
 
-    (*pp_m)->t = t;
+    for (i = 0; i < n*m; ++i) (*pp_m)->arr[i] = 0;
 
     return;
 } //Matrix_init
 
-void Matrix_copy(p_Matrix *pp_m, const p_Matrix p_m){
+//void Matrix_copy(p_Matrix *pp_m, const p_Matrix p_m){
 
 } //Matrix_init
 
-void Matrix_destroy(p_Matrix *pp_m){
+Matrix_destroy{
     free((*pp_m)->arr);
     free(*pp_m);
 
@@ -49,54 +43,70 @@ void Matrix_destroy(p_Matrix *pp_m){
     return;
 } // Matrix_destroy
 
-void Matrix_set_val(p_Matrix p_m, const unsigned i, const unsigned j, const void *val){
+// ---------------
+//  MATRIX ACCESS
+// ---------------
 
-} //Matrix_set_val
+// void Matrix_get_val(const p_Matrix p_m, const unsigned i, const unsigned j, void *val){
 
-void Matrix_set_row(p_Matrix p_m, const unsigned i, const void *val){
+// } // Matrix_get_val
 
-} //Matrix_set_row
+// void Matrix_get_row(const p_Matrix p_m, const unsigned i, void *row){
 
-void Matrix_set_col(p_Matrix p_m, const unsigned j, const void *val){
+// } //Matrix_get_row
 
-} //Matrix_set_col
+// void Matrix_get_col(const p_Matrix p_m, const unsigned j, void *col){
 
-// -------------
-//  MATRIX MATH
-// -------------
+// } //Matrix_get_col
 
-void Matrix_add_val(p_Matrix p_m, const void *val){
+// void Matrix_set_val(p_Matrix p_m, const unsigned i, const unsigned j, const void *val){
 
-} //Matrix_add
+// } //Matrix_set_val
 
-p_Matrix Matrix_add_mat(const p_Matrix p_m1, const p_Matrix p_m2){
+// void Matrix_set_row(p_Matrix p_m, const unsigned i, const void *val){
 
-    return NULL;
-} //Matrix_add
+// } //Matrix_set_row
 
-void Matrix_iadd_mat(p_Matrix p_m1, const p_Matrix p_m2){
+// void Matrix_set_col(p_Matrix p_m, const unsigned j, const void *val){
 
-} //Matrix_iadd_mat
+// } //Matrix_set_col
 
-p_Matrix Matrix_multiply(const p_Matrix p_m1, const p_Matrix p_m2){
+// // -------------
+// //  MATRIX MATH
+// // -------------
 
-    return NULL;
-} //Matrix_multiply
+// void Matrix_add_val(p_Matrix p_m, const void *val){
 
-p_Matrix Matrix_transpose(const p_Matrix p_m){
+// } //Matrix_add
 
-    return NULL;
-} //Matrix_transpose
+// p_Matrix Matrix_add_mat(const p_Matrix p_m1, const p_Matrix p_m2){
 
-void Matrix_itranspose(p_Matrix p_m){
+//     return NULL;
+// } //Matrix_add
 
-} //Matrix_itranspose
+// void Matrix_iadd_mat(p_Matrix p_m1, const p_Matrix p_m2){
 
-// -----------------
-//  MATRIX BOOLEANS
-// -----------------
+// } //Matrix_iadd_mat
 
-int Matrix_equal(p_Matrix p_m1, p_Matrix p_m2, void *tol){
+// p_Matrix Matrix_multiply(const p_Matrix p_m1, const p_Matrix p_m2){
 
-    return 0;
-} //Matrix_equal
+//     return NULL;
+// } //Matrix_multiply
+
+// p_Matrix Matrix_transpose(const p_Matrix p_m){
+
+//     return NULL;
+// } //Matrix_transpose
+
+// void Matrix_itranspose(p_Matrix p_m){
+
+// } //Matrix_itranspose
+
+// // -----------------
+// //  MATRIX BOOLEANS
+// // -----------------
+
+// int Matrix_equal(p_Matrix p_m1, p_Matrix p_m2, void *tol){
+
+//     return 0;
+// } //Matrix_equal
