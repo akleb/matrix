@@ -23,7 +23,13 @@ Matrix<T>::Matrix(const unsigned n_, const unsigned m_) : m(m_), n(n_){
 
 template <class T>
 Matrix<T>::Matrix(const Matrix &mat){
+    arr = new T[mat.n*mat.m];
+    n = mat.n;
+    m = mat.m;
 
+    for(unsigned i = 0; i < n*m; ++i) arr[i] = mat.arr[i];
+
+    return;
 } //Matrix
 
 template <class T>
@@ -92,9 +98,14 @@ void Matrix<T>::itranspose(){
 // -----------------
 
 template <class T>
-bool Matrix<T>::Matrix_equal(const Matrix *p_m, const T tol){
+bool Matrix<T>::equal(const Matrix *p_m, const T tol){
+    if(m != p_m->m || n != p_m->n) return false;
+    for (unsigned i = 0; i < m*n; ++i){
+        if(abs(arr[i] - p_m->arr[i]) > tol) return false;
+    } //for
 
-}
+    return true;
+} //equal
 
 // Specify templates to compile
 template class Matrix<int>;

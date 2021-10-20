@@ -200,7 +200,7 @@ public:
         -------
         returns true if matrices are identical
     */
-    bool Matrix_equal(const Matrix *p_m, const T tol);
+    bool equal(const Matrix *p_m, const T tol);
 };
 
 #endif
