@@ -133,13 +133,13 @@ public:
         Parameters
         ----------
         i   : row to change
-        val : new row to insert, must be of length p_m->m
+        row : new row to insert, must be of length p_m->m
 
         Returns
         -------
         void
     */
-    void setRow(const unsigned i, const T *val);
+    void setRow(const unsigned i, const T *row);
 
     /*
         Function : setCol
@@ -148,13 +148,13 @@ public:
         Parameters
         ----------
         j   : the column to replace
-        val : the new row to add, must be of length p_m->n
+        col : the new row to add, must be of length p_m->n
 
         Returns
         -------
         void
     */
-    void setCol(const unsigned j, const void *val);
+    void setCol(const unsigned j, const T *col);
 
     // -------------
     //  MATRIX MATH

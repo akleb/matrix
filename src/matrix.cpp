@@ -57,17 +57,20 @@ void Matrix<T>::getCol(const unsigned j, T *col){
 
 template <class T>
 void Matrix<T>::setVal(const unsigned i, const unsigned j, const T val){
-
+    arr[i*m + j] = val;
+    return;
 } //setVal
 
 template <class T>
-void Matrix<T>::setRow(const unsigned i, const T *val){
-
+void Matrix<T>::setRow(const unsigned i, const T *row){
+    for (unsigned j = 0; j < m; ++j) arr[i*m + j] = row[j];
+    return;
 } //setRow
 
 template <class T>
-void Matrix<T>::setCol(const unsigned j, const void *val){
-
+void Matrix<T>::setCol(const unsigned j, const T *col){
+    for (unsigned i = 0; i < n; ++i) arr[i*m + j] = col[i];
+    return;
 } //setCol
 
 // -------------
