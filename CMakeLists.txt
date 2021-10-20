@@ -2,10 +2,10 @@ cmake_minimum_required(VERSION 3.10)
 
 project(Matrix VERSION 1.0.0)
 
-enable_language(C)
+enable_language(CXX)
 
-set(CMAKE_C_STANDARD 11)
-set(CMAKE_C_STANDARD_REQUIRED True)
+set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 
@@ -22,11 +22,8 @@ include_directories(${INCDIR})
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/bin)
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/lib)
 
-set(M_INC ${INCDIR}/matrix.h)
-set(M_SRC ${SRCDIR}/matrix.c)
-
-# Add compiling to flags
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -DCOMPILING=yes")
+set(M_INC ${INCDIR}/matrix.hpp)
+set(M_SRC ${SRCDIR}/matrix.cpp)
 
 # ----------------
 #  Library Target
