@@ -22,10 +22,10 @@ int main(){
     D_TYPE correct[2][2] = {{22, 28}, {49, 64}};
     for(i = 0; i < 2; i++){
         mat.setRow(i, values[i]);
+        mat3.setRow(i, correct[i]);
     }//for
     for(i = 0; i < 3; i++){
         mat2.setRow(i, values[i]);
-        mat3.setRow(i, correct[i]);
     }//for
     Matrix<D_TYPE> multiplied = mat * mat2;
 
