@@ -5,8 +5,9 @@ macro(add_unit_test name)
                         )
         
         # add compilier options for making single/double precision and int tests
-        target_compile_options(${name}_${TYPE} PRIVATE -DD_TYPE=${TYPE})
-        
+        target_compile_options(${name}_${TYPE} PRIVATE -DD_TYPE=${TYPE}
+                                               PRIVATE -g3
+                                               PRIVATE -O0)
         # link to the appropriate libraries
         target_link_libraries(${name}_${TYPE} Matrix)
         

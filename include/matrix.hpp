@@ -35,11 +35,9 @@ public:
     Matrix(const unsigned n_, const unsigned m_);
 
     /*
-        Function : Matrix_copy
-            A copy constructor that intializes pp_m to p_m
+        Function : operator = 
+            A copy constructor that intializes matrix to p_m
 
-            REQUIRES MATCHING DESTROY
-        
         Parameters
         ----------
         p_m  : the matrix to copy
@@ -48,8 +46,35 @@ public:
         -------
         constructor
     */
-    Matrix(const Matrix &mat);
+    Matrix(const Matrix<T> &mat);  
 
+    /*
+        Function : operator = 
+            A copy constructor that intializes matrix to p_m
+
+        Parameters
+        ----------
+        p_m  : the matrix to copy
+
+        Returns
+        -------
+        constructor
+    */
+    Matrix<T>& operator=(const Matrix<T> &mat);
+
+    /*
+        Function : operator=
+            Assignment operator
+
+        Parameters
+        ----------
+        m : the matrix to copy
+
+        Returns
+        -------
+        copied matrix
+    */
+        
     /*
         Function : Matrix_destory
             Destroys a matrix
@@ -156,6 +181,19 @@ public:
     */
     void setCol(const unsigned j, const T *col);
 
+    /*
+        Function : print
+            prints the matrix
+        
+        Parameters
+        ----------
+
+        Returns
+        -------
+        void
+    */
+    void print();
+
     // -------------
     //  MATRIX MATH
     // -------------
@@ -181,6 +219,20 @@ public:
         void
     */
     void itranspose();
+
+    /*
+        Function : operator*
+            Preforms matrix multiplication
+
+        Parameters
+        ----------
+        m2 : right hand side matrix
+
+        Returns
+        -------
+        Multiplied matrix
+    */
+    Matrix<T> &operator*(const Matrix<T> m2);
 
     // -----------------
     //  MATRIX BOOLEANS

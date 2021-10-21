@@ -7,6 +7,8 @@
 
 #include "matrix.hpp"
 #include <stdlib.h>
+#include <stdio.h>
+#include <iostream>
 
 // -----------------------
 //  MATRIX INITIALIZATION
@@ -22,7 +24,7 @@ Matrix<T>::Matrix(const unsigned n_, const unsigned m_) : m(m_), n(n_){
 } //Matrix
 
 template <class T>
-Matrix<T>::Matrix(const Matrix &mat){
+Matrix<T>::Matrix(const Matrix<T> &mat){
     arr = new T[mat.n*mat.m];
     n = mat.n;
     m = mat.m;
@@ -31,6 +33,21 @@ Matrix<T>::Matrix(const Matrix &mat){
 
     return;
 } //Matrix
+
+template <class T>
+Matrix<T>& Matrix<T>::operator=(const Matrix<T> &mat){
+    n = mat.n;
+    m = mat.m;
+
+    arr = new T[n*m];
+    for (unsigned i = 0; i < n; i++){
+        for (unsigned j = 0; j < m; j++){
+            arr[i*m + j] = mat.arr[i*m + j];
+        } //for
+    } //for
+
+    return *this;
+} //operator=
 
 template <class T>
 Matrix<T>::~Matrix(){
@@ -79,6 +96,19 @@ void Matrix<T>::setCol(const unsigned j, const T *col){
     return;
 } //setCol
 
+template <class T>
+void Matrix<T>::print(){
+    for (unsigned i = 0; i < n; i++){
+        std::cout << " | ";
+        for(unsigned j = 0; j < m; j++){
+            std::cout << arr[i*m+j] << " ";
+        } //for
+        std::cout << "|\n";
+    } //for
+
+    return;
+}
+
 // -------------
 //  MATRIX MATH
 // -------------
@@ -97,8 +127,44 @@ Matrix<T> Matrix<T>::transpose(){
 
 template <class T>
 void Matrix<T>::itranspose(){
+    if (n != m){
+        printf("Error: The matrix must be square to do an inplace transpose");
+        return;
+    } //if
 
-}
+    T temp;
+
+    for(unsigned i = 1; i < n; ++i){
+        for(unsigned j = 0; j < i; ++j){
+            temp = arr[i*m + j];
+            arr[i*m + j] = arr[j*m +i];
+            arr[j*m + i] = temp;
+        } //for
+    }//for
+
+    return;
+}//itranspose
+
+template <class T>
+Matrix<T> &Matrix<T>::operator*(const Matrix<T> m2){
+    if(m != m2.n){
+        std::cerr << "Matrix dimensions not compatabile for mulitplication: " << m << " " << m2.n <<std::endl;
+        exit(1);
+    } //if
+
+    Matrix<T> new_matrix(this->n, m2.m);
+
+    for(unsigned i = 0; i < new_matrix.n; i++){
+        for(unsigned j = 0; j < new_matrix.m; j++){
+            for(unsigned k = 0; k < this->m; ++k){
+                new_matrix.arr[i*new_matrix.m + j] += this->arr[i*this->m + k]*m2.arr[k*m2.m + j];
+            } //for
+        } //for
+    } //for
+
+    *this = new_matrix;
+    return *this;
+}//operator*
 
 // -----------------
 //  MATRIX BOOLEANS
