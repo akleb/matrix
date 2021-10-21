@@ -146,7 +146,7 @@ void Matrix<T>::itranspose(){
 }//itranspose
 
 template <class T>
-Matrix<T> &Matrix<T>::operator*(const Matrix<T> m2){
+Matrix<T> Matrix<T>::operator*(const Matrix<T> m2){
     if(m != m2.n){
         std::cerr << "Matrix dimensions not compatabile for mulitplication: " << m << " " << m2.n <<std::endl;
         exit(1);
@@ -162,8 +162,7 @@ Matrix<T> &Matrix<T>::operator*(const Matrix<T> m2){
         } //for
     } //for
 
-    *this = new_matrix;
-    return *this;
+    return new_matrix;
 }//operator*
 
 // -----------------
