@@ -232,7 +232,7 @@ public:
         -------
         Multiplied matrix
     */
-    Matrix<T> &operator*(const Matrix<T> m2);
+    Matrix<T> operator*(const Matrix<T> m2);
 
     // -----------------
     //  MATRIX BOOLEANS
