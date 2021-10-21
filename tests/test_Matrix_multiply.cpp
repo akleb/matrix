@@ -25,7 +25,7 @@ int main(){
         mat3.setRow(i, correct[i]);
     }//for
     for(i = 0; i < 3; i++){
-        mat2.setRow(i, values[i]);
+        mat2.setRow(i, values2[i]);
     }//for
     Matrix<D_TYPE> multiplied = mat * mat2;
 
