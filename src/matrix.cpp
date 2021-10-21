@@ -9,6 +9,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <iostream>
+#include <cmath>
 
 // -----------------------
 //  MATRIX INITIALIZATION
@@ -144,6 +145,14 @@ void Matrix<T>::itranspose(){
 
     return;
 }//itranspose
+
+template <class T>
+double Matrix<T>::normL2(){
+    double norm = 0;
+    for(unsigned i = 0; i < n*m; ++i) norm += arr[i]*arr[i];
+
+    return sqrt(norm);
+} //normL2
 
 template <class T>
 Matrix<T> Matrix<T>::operator*(const Matrix<T> m2){

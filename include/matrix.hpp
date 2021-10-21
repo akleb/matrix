@@ -221,6 +221,18 @@ public:
     void itranspose();
 
     /*
+        Function : normL2
+            Preforms an L2 norm over the whole matrix
+        
+        Parameters
+        ----------
+
+        Returns
+        -------
+        the L2 norm
+    */
+    double normL2();
+    /*
         Function : operator*
             Preforms matrix multiplication
 
