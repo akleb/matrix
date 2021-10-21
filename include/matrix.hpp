@@ -32,7 +32,7 @@ public:
         -------
         constructor
     */
-    Matrix(const unsigned n_, const unsigned m_);
+    Matrix(const unsigned n_=0, const unsigned m_=0);
 
     /*
         Function : operator = 

@@ -17,7 +17,10 @@
 
 template <class T>
 Matrix<T>::Matrix(const unsigned n_, const unsigned m_) : m(m_), n(n_){
-    arr = new T[n*m];
+    if (n*m != 0)
+        arr = new T[n*m];
+    else   
+        arr = nullptr;
 
     for (unsigned i = 0; i < n*m; ++i) arr[i] = 0;
 
@@ -37,6 +40,7 @@ Matrix<T>::Matrix(const Matrix<T> &mat){
 
 template <class T>
 Matrix<T>& Matrix<T>::operator=(const Matrix<T> &mat){
+    if (arr) delete[] arr;
     n = mat.n;
     m = mat.m;
 
